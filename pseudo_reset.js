@@ -7,6 +7,8 @@
 
 // import 'fs' function from node library
 
+const fs = require('fs') //file system
+
 // check the existence of file under the output folder
 // if exits,
 //    remove it
