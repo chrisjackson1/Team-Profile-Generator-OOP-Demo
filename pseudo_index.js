@@ -5,16 +5,16 @@
 // Imports classes for Manager, Engineer, Intern
 
 const  Manager = require('./lib/pseudo_Manager'); 
-// import { Engineer } from './lib/pseudo_Engineer';
-// import { Intern } from './lib/pseudo_Engineer.js';
-
+const  Engineer = require ('./lib/pseudo_Engineer');
+const  Intern = require ('./lib/pseudo_Engineer.js');
+const path = require('path');
+const DIST_DIR = path.resolve(__dirname, 'dist');
 
 
 // Imports external package 'inquirer'
 const inquirer = require('inquirer');
 
 // Imports 'path' from node library to be used to create output folder and file name
-const path = require('path');
 //    Hint: __dirname, process.cwd() or you can use relative path without using 'path' library function
 
 // Imports 'fs' from node library
@@ -22,12 +22,12 @@ const fs = require('fs') //file system
 // Imports page template function and assign the function to a variable
 const generateHTML = require('./src/pseudo_page_template');
 // Create variables for the output folder and the html file name
-var output = './dist/pseudo_team.html';
+const output = './dist/pseudo_team.html';
 // Create an empty array to store the team member objects
-var teamMember = [];
+const teamMember = [];
 // Create an empty array to store employee IDs to be used to check for the dupliates
 
-var employeeIDs = [];
+const employeeIDs = [];
 
 // **********************
 // Main Pfocess
@@ -72,8 +72,7 @@ function createManager() {
       const manager = new Manager(answers.id, answers.name, answers.email, answers.officeNumber)
       teamMember.push(manager)
       createTeam()
-      addEngineer()
-      addIntern()
+      
     })
   }
 
@@ -85,41 +84,97 @@ function createManager() {
         name: "input", 
         choices: ['Engineer','Intern','Exit']
        }
-     ]).then((a) => {
-      console.log(a)
+     ]).then((selection) => {
+    
+      if ('Engineer' === selection.input) {
+      console.log('You have selected Engineer')
+      createEngineer()
+      } else if('Intern' === selection.input){
+        createIntern()
+        console.log("You have selected Intern")
+      } else {
+        console.log('Exited')
+
+      }
      }) 
    }
 
-   function addEngineer(){
+   function createEngineer(){
     inquirer.prompt([
       {
        type: "input",
-       message: "Enter the Engineers info",
-       name: "info", 
-       
-      }
-    ]).then((p) => {
-     console.log(p)
+       message: "What is the Engineer's email",
+       name: "email", 
+      },
+      {
+        type: "input",
+        message: "What is the Engineer's id",
+        name: "id", 
+        
+       },
+       {
+        type: "input",
+        message: "What is the Engineer's name",
+        name: "name", 
+        
+       },
+       {
+        type: "input",
+        message: "What is the Engineer's github",
+        name: "github", 
+        
+       }
+    ]) .then((answers) => {
+      // console.log(answers)
+      const engineer = new Engineer(answers.id, answers.name, answers.email, answers.github)
+      teamMember.push(engineer)
+      createTeam();
     }) 
    }
 
-   function addIntern(){
+   function createIntern(){
     inquirer.prompt([
       {
        type: "input",
-       message: "Enter the interns information",
-       name: "information", 
+       message: "What is the interns school",
+       name: "school", 
        
-      }
-    ]).then((p) => {
-     console.log(p)
+      },
+      {
+        type: "input",
+        message: "What is the interns id",
+        name: "id", 
+        
+       },
+       {
+        type: "input",
+        message: "What is the interns email",
+        name: "email", 
+        
+       }
+       
+
+    ]).then((answers) => {
+      // console.log(answers)
+      const intern = new Intern(answers.id, answers.name, answers.email, answers.school)
+      teamMember.push(intern)
+      createTeam();
     }) 
    }
 
-   function buildTeam(){
+  function buildTeam(){
     
+    fs.existsSync(DIST_DIR)
+    generateHTML(teamMember);
    }
- 
+ //  5. function build team
+//      - check if the output folder path already exists.
+//      -   if not, create it
+//      - call page template function passing the team member object array as input argument
+//      - write the returned template function to the output
+//
+//      - Hint: fs.existsSync, fs.mkdirSync, and fs.writeFileSync
+
 //
 //  1b. function to create manager
 //      - inquire user to enter manager's name, id, email, and office number
