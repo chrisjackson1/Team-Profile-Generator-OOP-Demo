@@ -6,10 +6,10 @@
 
 const  Manager = require('./lib/pseudo_Manager'); 
 const  Engineer = require ('./lib/pseudo_Engineer');
-const  Intern = require ('./lib/pseudo_Engineer.js');
+const  Intern = require ('./lib/pseudo_Intern');
 const path = require('path');
 const DIST_DIR = path.resolve(__dirname, 'dist');
-
+const distPath = path.join(DIST_DIR, 'pseudo_team.html')
 
 // Imports external package 'inquirer'
 const inquirer = require('inquirer');
@@ -87,15 +87,16 @@ function createManager() {
      ]).then((selection) => {
     
       if ('Engineer' === selection.input) {
-      console.log('You have selected Engineer')
+      console.log('You selected Engineer')
       createEngineer()
       } else if('Intern' === selection.input){
         createIntern()
         console.log("You have selected Intern")
       } else {
         console.log('Exited')
-
+        buildTeam()
       }
+
      }) 
    }
 
@@ -151,8 +152,12 @@ function createManager() {
         message: "What is the interns email",
         name: "email", 
         
+       },
+       {
+       type:"input",
+       message: "What is the interns name?",
+       name: "name",
        }
-       
 
     ]).then((answers) => {
       // console.log(answers)
@@ -164,8 +169,11 @@ function createManager() {
 
   function buildTeam(){
     
-    fs.existsSync(DIST_DIR)
-    generateHTML(teamMember);
+    // fs.existsSync(DIST_DIR)
+    // generateHTML(teamMember);
+    fs.writeFile(distPath, generateHTML(teamMember),function(err, result) {
+      if(err) console.log('error', err);
+    })
    }
  //  5. function build team
 //      - check if the output folder path already exists.
