@@ -1,7 +1,3 @@
-
-
-// Imports classes for Manager, Engineer, Intern
-
 const  Manager = require('./lib/Manager'); 
 const  Engineer = require ('./lib/Engineer');
 const  Intern = require ('./lib/Intern');
@@ -9,21 +5,21 @@ const path = require('path');
 const DIST_DIR = path.resolve(__dirname, 'dist');
 const distPath = path.join(DIST_DIR, 'pseudo_team.html')
 
-// Imports external package 'inquirer'
+
 const inquirer = require('inquirer');
 
 // Imports 'path' from node library to be used to create output folder and file name
 //    Hint: __dirname, process.cwd() or you can use relative path without using 'path' library function
 
-// Imports 'fs' from node library
+
 const fs = require('fs') //file system
-// Imports page template function and assign the function to a variable
+
 const generateHTML = require('./src/pseudo_page_template');
-// Create variables for the output folder and the html file name
+
 const output = './dist/pseudo_team.html';
-// Create an empty array to store the team member objects
+
 const teamMember = [];
-// Create an empty array to store employee IDs to be used to check for the dupliates
+
 
 const employeeIDs = [];
 
@@ -38,7 +34,7 @@ function init(){
   createManager()
 }
 //
-//  1a. call create manager function
+
 
 function createManager() {
   const questions = [
