@@ -16,14 +16,16 @@ body {
 }
 
 #navbar {
-    background-color: lightblue;
+    background-color: red;
     color: blue;
     font-size: 50px;
+    text-align: center;
 }
 
 #navbar-text{
-    color: red;
+    color: white;
     justify-content: center;
+    background-color: red;
 }
 
 .navbar-brand {
