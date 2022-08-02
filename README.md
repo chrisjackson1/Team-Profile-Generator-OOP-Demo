@@ -29,8 +29,8 @@ If you have any questions about my project, you can contact me at
 
 cj310@scarletmail.rutgers.edu
 
-# Authors 
+## Authors 
 
 Chris Jackson
 
-## Screenshot
+
