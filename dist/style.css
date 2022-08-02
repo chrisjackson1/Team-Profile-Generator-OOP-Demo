@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: lightslategray;
+    --secondary: white;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#navbar {
+    background-color: lightblue;
+    color: blue;
+    font-size: 50px;
+}
+
+#navbar-text{
+    color: red;
+    justify-content: center;
+}
+
+.navbar-brand {
+    font-size: 50px;
+}
+
+
+.card-header {
+    background-color: rgb(38, 93, 234);
+    color: var(--secondary);
+}
+
+.card-body {
+    background-color: white;
+    color: black;
+}
+
+.container {
+    margin: 100px auto;
+    justify-content: space-evenly;
+    display: flex;
+    
+}
